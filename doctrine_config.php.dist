@@ -1,0 +1,21 @@
+<?php
+/**
+ * Load DB connection parameters from config
+ */
+if($dbtype == 'sqlsrv') {
+  $connectionOptions = array(
+    'driver' => 'pdo_sqlsrv',
+    'user' => '',
+    'password' => '',
+    'host' => '',
+    'dbname' => 'serverbrowser'
+  );
+} else if ($dbtype == 'mysql') {
+  $connectionOptions = array(
+    'driver' => 'pdo_mysql',
+    'dbname' => 'kagsb_prod',
+    'user' => '',
+    'password' => '',
+    'host' => 'localhost'
+  );
+}

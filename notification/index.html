@@ -1,0 +1,83 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket;
+  var connected = false;
+  function doConnect(nickname) {
+    $('#nickname').before('<h3 id="connecting" style="color:green">Connecting...</h3>');
+    
+    socket = io.connect('http://localhost:81', {nickname: nickname});
+    socket.on('chat', function (data) {
+      $('#chatlog').append("\n" + data);
+      console.log(data);
+    });
+    socket.on('error', function (reason) {
+      console.error('Unable to connect to Chat server.', reason);
+    });
+    
+    socket.on('connect', function() {
+      connected = true;
+      socket.emit('nickname', nickname);
+      $('#connecting').remove();
+      $('#nickname').next().after('<h3 id="connected" style="color:green">Connected!</h3>');
+      $('#nickname').next().remove();
+      $('#nickname').remove();
+    });
+    
+    socket.on('buddylist', function(list) {
+      console.log(list);
+    }) 
+    
+  }
+  function sendChat() {
+    if(!connected)
+      return;
+    socket.emit('message', $('#chat-input').val());
+    $('#chat-input').val('');
+  }
+  function connect() {
+    if(connected)
+      return;
+    var nick = $('#nickname').val();
+    if(nick.length < 3) {
+      alert('Nickname too short.');
+      return;
+    }
+    if(nick.length > 15) {
+      alert('Nickname too long.');
+      return;
+    }
+    doConnect(nick);        
+    $('#chat-input').focus();
+  }
+  
+  function getBuddies() {
+    if(!connected)
+      return;
+    socket.emit('getBuddies');
+  }
+  
+  $(function() {
+    $('#nickname').keydown(function(event) {
+      if(event.which == 13) {
+        event.preventDefault();
+        connect();
+      }
+    });
+    $('#chat-input').keydown(function(event) {
+      if(event.which == 13) {
+        event.preventDefault();
+        sendChat();
+      }
+    });
+    
+  });
+</script>
+<input type="text" id="nickname" />
+<input type="button" value="Connect" onclick="connect()"/>
+<br/>
+<input type="text" id="chat-input"/>
+<input type="button" onclick="sendChat()" value="send"/>
+<input type="button" onclick="getBuddies()" value="getBuddies"/>
+<br />
+<pre id="chatlog" style="border: 2px solid #3c3c3c; width: 600px; height: 600px; overflow-y:scroll;"></pre>

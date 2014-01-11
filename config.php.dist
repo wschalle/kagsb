@@ -1,0 +1,17 @@
+<?php
+//Config
+$config = array();
+// buddy refresh time
+$config['buddyTime'] = 2;
+//Site root relative to host
+$config['siteRoot'] = '/kagsb';
+//mysql or sqlsrv (don't ask)
+$config['dbtype'] = 'mysql';
+//Buddy notification endpoint -- api calls for buddy stuffs go here
+$config['notifierEndpoint'] = 'http://localhost:82';
+//Login callback url for KAG SSO
+$config['ssoProvider'] = 'http://localhost/login.php';
+// "development" or "prod"
+$config['environment'] = 'development';
+// "site.php" or "site_disabled.php" for maintenance
+$config['site_template'] = 'site.php';

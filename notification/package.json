@@ -1,0 +1,16 @@
+{
+  "name": "kagsb",
+  "description": "Kag Server Browser",
+  "author": "William Schaller <wschalle@gmail.com>",
+  "dependencies": {
+    "socket.io": ">= 0.9.15",
+    "dnode": ">= 1.2.0",
+	"jquery": ">= 1.8.0",
+	"iniparser": ">= 1.0.5"
+  },
+  "engine": "node 0.10.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wschalle/kagsb.git"
+  }
+}

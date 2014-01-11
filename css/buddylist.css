@@ -1,0 +1,33 @@
+/* 
+    Document   : buddylist.css
+    Created on : Sep 10, 2012, 9:05:32 AM
+    Author     : William Schaller
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#buddylist {
+  right: 0;
+  position:fixed;
+  height: auto;
+  width: 280px;
+  background-color: #1B1B1B;
+  color: #f2f2f2;
+}
+
+@media (max-width: 979px) {
+  #buddylist { 
+    position: static;
+    float:right;
+    width: 100%;
+    height: auto;
+    margin-top: -20px;
+  }
+}
+
+@media (max-width: 767px) {
+  #buddylist {
+  }
+}
+
+

@@ -1,0 +1,9 @@
+; Notification Server Config File
+; 9/10/2012
+
+; Site root relative to host
+siteRoot      = /kagsb
+; site hostname
+host          = localhost
+; 0 = none, 1 = error, 2 = warn, 3 = debug
+logLevel      = 2
